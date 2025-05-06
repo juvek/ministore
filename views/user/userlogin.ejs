@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniStore - Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">MiniStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <a href="#" class="nav-icon">
+                        <i class="bi bi-search"></i>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="bi bi-cart"></i>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="bi bi-person"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Login Form -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <!-- Left Side - Hero Text -->
+                <div class="col-lg-6">
+                    <div class="hero-text">
+                        <h1>Welcome Back!</h1>
+                        <p>Log in to access your account, track orders, manage your wishlist, and enjoy a personalized shopping experience at MiniStore.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-outline-light">Browse Collections</a>
+                            <a href="#" class="btn btn-light">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Login Form -->
+                <div class="col-lg-6">
+                    <div class="login-form-container">
+                        <h3 class="form-title">Log In to Your Account</h3>
+                        <form>
+                            <!-- Email Field -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Your email address">
+                            </div>
+                            
+                            <!-- Password Field -->
+                            <div class="mb-3 password-field">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Your password">
+                                <span class="password-toggle">
+                                    <i class="bi bi-eye"></i>
+                                </span>
+                            </div>
+                            
+                            <!-- Forgot Password Link -->
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                            
+                            <!-- Remember Me Checkbox -->
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberCheck">
+                                <label class="form-check-label" for="rememberCheck">
+                                    Remember me
+                                </label>
+                            </div>
+                            
+                            <!-- Login Button -->
+                            <button type="submit" class="btn btn-primary w-100">Log In</button>
+                        </form>
+                        
+                        <!-- Divider -->
+                        <div class="divider">
+                            <span>or log in with</span>
+                        </div>
+                        
+                        <!-- Social Login Buttons -->
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="social-btn w-100">
+                                    <i class="bi bi-google social-icon"></i> Google
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="social-btn w-100">
+                                    <i class="bi bi-facebook social-icon"></i> Facebook
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Signup Link -->
+                        <p class="text-center mt-4 mb-0">
+                            Don't have an account? <a href="#" class="text-primary">Sign up</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password visibility toggle
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const passwordField = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+        });
+    </script>
+</body>
+</html>    

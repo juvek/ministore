@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniStore - Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">MiniStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active mx-2" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Inline Search Bar -->
+                    <form class="d-flex align-items-center" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                
+                    <a href="#" class="nav-icon badge-container">
+                        <i class="bi bi-heart"></i>
+                        <span class="badge-notify">2</span>
+                    </a>
+                    <a href="#" class="nav-icon badge-container">
+                        <i class="bi bi-cart"></i>
+                        <span class="badge-notify">3</span>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="bi bi-person"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+                
+
+    <!-- Hero Section -->
+    <section class="hero position-relative">
+        <img src="/api/placeholder/1200/500" alt="Spring Collection" class="hero-img w-100 h-100 position-absolute top-0 start-0 object-fit-cover">
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+    
+        <div class="container text-center position-relative text-white z-1">
+            <h1 class="mb-4">Spring Collection 2025</h1>
+            <p class="lead mb-4">Discover the latest trends in fashion with our new spring collection</p>
+            <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+    </section>
+    
+
+    <!-- Categories Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Shop by Category</h2>
+                <p class="text-muted">Browse our wide selection of products by category</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="category-card position-relative">
+                        <img src="/api/placeholder/400/250" alt="Category" class="img-fluid w-100">
+                        <div class="position-absolute bottom-0 start-0 p-4 w-100">
+                            <h3 class="text-white fw-bold">Women</h3>
+                            <a href="#" class="btn btn-outline-light">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card position-relative">
+                        <img src="/api/placeholder/400/250" alt="Category" class="img-fluid w-100">
+                        <div class="position-absolute bottom-0 start-0 p-4 w-100">
+                            <h3 class="text-white fw-bold">Men</h3>
+                            <a href="#" class="btn btn-outline-light">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card position-relative">
+                        <img src="/api/placeholder/400/250" alt="Category" class="img-fluid w-100">
+                        <div class="position-absolute bottom-0 start-0 p-4 w-100">
+                            <h3 class="text-white fw-bold">Kids</h3>
+                            <a href="#" class="btn btn-outline-light">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold">Featured Products</h2>
+                <a href="#" class="btn btn-outline-primary">View All</a>
+            </div>
+            <div class="row g-4">
+                <!-- Product 1 -->
+                <div class="col-md-3">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <span class="discount-badge">-20%</span>
+                            <img src="/api/placeholder/280/320" class="card-img-top" alt="Product">
+                            <div class="position-absolute top-0 end-0 p-2">
+                                <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="product-title">Summer Dress</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="product-price mb-0">$49.99 <small class="text-decoration-line-through text-muted">$59.99</small></p>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="col-md-3">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <img src="/api/placeholder/280/320" class="card-img-top" alt="Product">
+                            <div class="position-absolute top-0 end-0 p-2">
+                                <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="product-title">Classic T-Shirt</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="product-price mb-0">$24.99</p>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="col-md-3">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <span class="discount-badge">-15%</span>
+                            <img src="/api/placeholder/280/320" class="card-img-top" alt="Product">
+                            <div class="position-absolute top-0 end-0 p-2">
+                                <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="product-title">Casual Jeans</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="product-price mb-0">$39.99 <small class="text-decoration-line-through text-muted">$49.99</small></p>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="col-md-3">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <img src="/api/placeholder/280/320" class="card-img-top" alt="Product">
+                            <div class="position-absolute top-0 end-0 p-2">
+                                <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="product-title">Sports Shoes</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="product-price mb-0">$79.99</p>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer Banner -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-3">Special Offer</h2>
+                    <h3 class="text-primary mb-4">Get 30% Off Your First Purchase</h3>
+                    <p class="mb-4">Sign up for our newsletter and get an exclusive discount code for your first order. Limited time offer!</p>
+                    <a href="#" class="btn btn-primary">Get Code Now</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="/api/placeholder/600/400" alt="Special Offer" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="feature-box bg-white">
+                        <i class="bi bi-truck feature-icon"></i>
+                        <h4 class="fw-bold mb-2">Free Shipping</h4>
+                        <p class="text-muted mb-0">On all orders over $50</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-box bg-white">
+                        <i class="bi bi-shield-check feature-icon"></i>
+                        <h4 class="fw-bold mb-2">Secure Payment</h4>
+                        <p class="text-muted mb-0">100% secure payment</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-box bg-white">
+                        <i class="bi bi-arrow-counterclockwise feature-icon"></i>
+                        <h4 class="fw-bold mb-2">Easy Returns</h4>
+                        <p class="text-muted mb-0">30 days return policy</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-box bg-white">
+                        <i class="bi bi-headset feature-icon"></i>
+                        <h4 class="fw-bold mb-2">24/7 Support</h4>
+                        <p class="text-muted mb-0">Customer support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-3">Subscribe to Our Newsletter</h2>
+            <p class="text-muted mb-4">Get updates about new products and special offers</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control form-control-lg" placeholder="Your email address">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="navbar-brand text-white mb-4">MiniStore</h1>
+                    <p class="text-muted mb-4">Your one-stop shop for household needs at affordable prices.</p>
+                    <div class="mb-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-pinterest"></i></a>
+                    </div>
+                    <div class="payment-icons mt-3">
+                        <img src="/images/payments/1.png" alt="Visa" width="40" class="me-2">
+                        <img src="/images/payments/2.png" alt="MasterCard" width="40" class="me-2">
+                        <img src="/images/payments/5.png" alt="PayPal" width="40" class="me-2">
+                    </div>
+                    
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Shop</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Women's Clothing</a></li>
+                        <li><a href="#">Men's Clothing</a></li>
+                        <li><a href="#">Kids Collection</a></li>
+                        <li><a href="#">Acce</a></li>
+                        <li><a href="#">New products</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Help</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Customer Service</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Find a Store</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Contact</h5>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt me-2"></i> 123 Fashion Street, NY 10001</li>
+                        <li><i class="bi bi-telephone me-2"></i> (123) 456-7890</li>
+                        <li><i class="bi bi-envelope me-2"></i> contact@ministore.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-5 mb-4" style="border-color: #475569;">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 MiniStore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-muted me-3">Privacy Policy</a>
+                    <a href="#" class="text-muted me-3">Terms of Service</a>
+                    <a href="#" class="text-muted">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
