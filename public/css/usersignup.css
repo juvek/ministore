@@ -22,6 +22,10 @@ body {
     color: var(--primary-color);
     font-size: 1.5rem;
 }
+.brand-icon {
+    color: var(--primary-color);
+    margin-right: 8px; 
+}
 
 .nav-link {
     font-weight: 500;
@@ -46,7 +50,7 @@ body {
 /* Hero section */
 .hero {
     min-height: calc(100vh - 76px);
-    background: url('/public/images/background.jpg') right center/cover no-repeat;
+    background: url('/images/background.jpg') right center/cover no-repeat;
     position: relative;
 }
 
@@ -57,7 +61,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.8) 100%);
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%);
 }
 
 .hero-content {
@@ -68,7 +72,7 @@ body {
 
 /* Form styles */
 .signup-form {
-    background-color: white;
+    background-color: rgb(176, 164, 164);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 2.5rem;
@@ -204,6 +208,12 @@ body {
 .social-icon {
     margin-right: 0.5rem;
     font-size: 1.2rem;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75rem;
+    display: none;
 }
 
 @media (max-width: 991.98px) {

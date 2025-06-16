@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification - OTP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .login_wrap {
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+        
+        .padding_eight_all {
+            padding: 2.5rem;
+        }
+        
+        .bg-white {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .heading_s1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .heading_s1 h3 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .verification-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e1e5e9;
+            padding: 12px 15px;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .btn {
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #6c757d;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .btn-secondary:hover {
+            background: #6c757d;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .otp-timer {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        #timerValue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        #timerValue.expired {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .alert {
+            border-radius: 10px;
+            border: none;
+            margin-top: 1rem;
+        }
+        
+        .alert-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+        }
+        
+        .alert-success {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            color: white;
+        }
+        
+        .text-muted {
+            color: #6c757d !important;
+        }
+        
+        .pt-25 {
+            padding-top: 1.5rem;
+        }
+        
+        .text-center a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .text-center a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .timer-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 576px) {
+            .padding_eight_all {
+                padding: 1.5rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login_wrap">
+            <div class="padding_eight_all bg-white">
+                <div class="heading_s1">
+                    <div class="text-center">
+                        <i class="fas fa-envelope-open verification-icon"></i>
+                    </div>
+                    <h3>Email Verification</h3>
+                    <p class="text-muted">We've sent a 6-digit verification code to your email</p>
+                </div>
+                
+                <form id="otpForm" method="post" onsubmit="return validateOTP()">
+                    <div class="form-group">
+                        <label for="otp">Enter OTP Code:</label>
+                        <input type="text" 
+                               id="otp" 
+                               name="otp" 
+                               class="form-control" 
+                               required 
+                               maxlength="6" 
+                               pattern="\d*" 
+                               placeholder="000000"
+                               autocomplete="off" />
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="verifyBtn">
+                        <i class="fas fa-check-circle me-2"></i>Verify Email
+                    </button>
+                    
+                    <div class="form-group text-center">
+                        <div id="otpTimer" class="otp-timer">
+                            <span class="timer-text">Code expires in:</span>
+                            <span id="timerValue">60</span>
+                            <span class="timer-text">seconds</span>
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="resendBtn" disabled onclick="resendOTP()">
+                            <i class="fas fa-redo me-2"></i>Resend OTP
+                        </button>
+                    </div>
+                    
+                    <div id="messageContainer"></div>
+                </form>
+                
+                <div class="text-muted text-center pt-25">
+                    Already verified? <a href="/login"><i class="fas fa-sign-in-alt me-1"></i>Login now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.0/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        // Focus on OTP input when page loads
+        document.getElementById("otp").focus();
+        
+        // Timer variables
+        let timer = 60;
+        let timerInterval;
+        
+        // DOM elements
+        const timerValueElement = document.getElementById("timerValue");
+        const otpInput = document.getElementById("otp");
+        const resendBtn = document.getElementById("resendBtn");
+        const verifyBtn = document.getElementById("verifyBtn");
+        const messageContainer = document.getElementById("messageContainer");
+        
+        // Start countdown timer
+        function startTimer() {
+            resendBtn.disabled = true;
+            timer = 60;
+            timerValueElement.classList.remove("expired");
+            timerValueElement.textContent = timer;
+            otpInput.disabled = false;
+            verifyBtn.disabled = false;
+            
+            timerInterval = setInterval(() => {
+                timer--;
+                timerValueElement.textContent = timer;
+                
+                if (timer <= 0) {
+                    clearInterval(timerInterval);
+                    timerValueElement.classList.add("expired");
+                    timerValueElement.textContent = "Expired";
+                    otpInput.disabled = true;
+                    verifyBtn.disabled = true;
+                    resendBtn.disabled = false;
+                    
+                    showMessage("OTP has expired. Please request a new code.", "danger");
+                }
+            }, 1000);
+        }
+        
+        // Validate OTP form
+        function validateOTP() {
+            const otpValue = otpInput.value.trim();
+            
+            if (otpValue.length !== 6) {
+                showMessage("Please enter a valid 6-digit OTP code.", "danger");
+                return false;
+            }
+            
+            if (!/^\d{6}$/.test(otpValue)) {
+                showMessage("OTP must contain only numbers.", "danger");
+                return false;
+            }
+            
+            if (timer <= 0) {
+                showMessage("OTP has expired. Please request a new code.", "danger");
+                return false;
+            }
+            
+            // Simulate OTP verification (replace with actual verification logic)
+            verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Verifying...';
+            verifyBtn.disabled = true;
+
+            $.ajax({
+              type:"POST",
+              url:"verifyotp",
+              data:{otp:otpValue},
+              success:function(response){
+                if(response.success){
+                  Swal.fire({
+                    icon:"success",
+                    title:"otp verified",
+                    showConfirmButton:false,
+                    timer:1500,
+                  }).then(()=>{
+                    window.location.href=response.redirectUrl;
+                  })
+                }else{
+                    Swal.fire({
+                    icon:"error",
+                    title:"Error",
+                    text:response.message,
+                    })
+                }
+              },
+              error:function(){
+                Swal.fire({
+                  icon:"error",
+                  title:"invalid otp",
+                  text:"please try again"
+                })
+              }
+            })
+            
+           /* setTimeout(() => {
+                // Simulate successful verification
+                if (otpValue === "123456") {
+                    showMessage("Email verified successfully! Redirecting...", "success");
+                    setTimeout(() => {
+                        window.location.href = "/login";
+                    }, 2000);
+                } else {
+                    showMessage("Invalid OTP code. Please try again.", "danger");
+                    verifyBtn.innerHTML = '<i class="fas fa-check-circle me-2"></i>Verify Email';
+                    verifyBtn.disabled = false;
+                    otpInput.focus();
+                }
+            }, 1500); */
+            
+            return false; // Prevent form submission
+        }
+        
+        // Show message function
+        function showMessage(message, type) {
+            const alertClass = type === "success" ? "alert-success" : "alert-danger";
+            const icon = type === "success" ? "fas fa-check-circle" : "fas fa-exclamation-triangle";
+            
+            messageContainer.innerHTML = `
+                <div class="alert ${alertClass}" role="alert">
+                    <i class="${icon} me-2"></i>${message}
+                </div>
+            `;
+            
+            // Auto-hide message after 5 seconds
+            setTimeout(() => {
+                messageContainer.innerHTML = "";
+            }, 5000);
+        }
+        
+        // Resend OTP functionality
+       function resendOTP(){
+          clearInterval(timerInterval)
+          timer=60
+          otpInput.disabled=false
+          timerValueElement.classList.remove("expired")
+          startTimer()
+
+          $.ajax({
+              type:"POST",
+              url:"resendotp",
+              success:function(response){
+                if(response.success){
+                  Swal.fire({
+                    icon:"success",
+                    title:"otp resend sucessfully",
+                    showConfirmButton:false,
+                    timer:1500,
+                  })
+                }else{
+                    Swal.fire({
+                    icon:"error",
+                    title:"Error",
+                    text:response.message,
+                    })
+                }
+              },
+              error:function(){
+                Swal.fire({
+                  icon:"error",
+                  title:"invalid otp",
+                  text:"please try again"
+                })
+              }
+            })
+
+            return false
+       }
+        
+        // Only allow numeric input
+        otpInput.addEventListener("input", function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        // Auto-submit when 6 digits are entered
+        otpInput.addEventListener("input", function(e) {
+            if (this.value.length === 6 && timer > 0) {
+                setTimeout(() => {
+                    validateOTP();
+                }, 500);
+            }
+        });
+        
+        // Initialize timer on page load
+        startTimer();
+    </script>
+</body>
+</html>

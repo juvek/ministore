@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ministore Admin Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      
+
+    }
+
+    :root {
+      --primary-color: #6366f1;
+      --secondary-color: #f9fafb;
+      --text-color: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+    }
+
+    body {
+      background-color: #f3f4f6;
+      color: var(--text-color);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('/images/adminlogin.jpeg') right center/cover no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .login-container {
+      display: flex;
+      width: 900px;
+      height: 500px;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Left Side - Description */
+    .description-side {
+      flex: 1;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .description-side::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      top: -100px;
+      left: -100px;
+    }
+
+    .description-side::after {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      bottom: -50px;
+      right: -50px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo h2 {
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .description {
+      position: relative;
+      z-index: 1;
+    }
+
+    .description h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .description p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .feature-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+    }
+
+    /* Right Side - Login Form */
+    .login-side {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .forgot-password {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      background-color: #5558df;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--border-color);
+    }
+
+    .divider::before {
+      margin-right: 10px;
+    }
+
+    .divider::after {
+      margin-left: 10px;
+    }
+
+    .social-login {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      background-color: white;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background-color: #f9fafb;
+    }
+
+    .social-btn.google {
+      color: #ea4335;
+    }
+
+    .social-btn.microsoft {
+      color: #0078d4;
+    }
+
+    .error-message {
+    color: red;
+    font-size: 0.75rem;
+    display: none;
+    }
+    /* Responsive Design */
+    @media (max-width: 920px) {
+      .login-container {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+      }
+
+      .description-side, .login-side {
+        width: 100%;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Left Side - Description -->
+    <div class="description-side">
+      <div class="logo">
+        <i class="fas fa-store fa-lg"></i>
+        <h2>MiniStore</h2>
+      </div>
+      <div class="description">
+        <h1>Premium Quality Food Products</h1>
+        <p>Ministore offers a wide range of authentic, high-quality food products including homemade pickles, nuts, spices, and specialty food items. Our Admin Panel helps you manage your inventory and orders effortlessly.</p>
+      </div>
+      <ul class="features">
+        <li class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-check fa-xs"></i>
+          </div>
+          <span>100% Authentic and Natural Ingredients</span>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-check fa-xs"></i>
+          </div>
+          <span>Homemade Recipes and Traditional Methods</span>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-check fa-xs"></i>
+          </div>
+          <span>Quick Delivery and Customer Satisfaction</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Side - Login Form -->
+    <div class="login-side">
+      <div class="login-header">
+        <h2>Admin Login</h2>
+        <p>Enter your credentials to access the dashboard</p>
+      </div>
+      <form class="login-form" method="post" id="loginform" action="/admin/login">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="emailid" class="input-field" name="email" placeholder="admin@ministore.com">
+            <div id="error1" class="error-message"></div>
+          </div>
+        </div>
+        <% if (locals.message) { %>
+            <div class="alert alert-danger">
+              <%= message %>
+           </div>
+          <% } %>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="passwordid" class="input-field" name="password" placeholder="Enter your password">
+            <div id="error2" class="error-message"></div>
+          </div>
+        </div>
+        <div class="form-footer">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+        <button type="submit" class="login-btn">Login to Dashboard</button>
+        
+      </form>
+    </div>
+  </div>
+
+  <script>
+    
+    
+
+        const emailid = document.getElementById("emailid");
+        const passwordid = document.getElementById("passwordid");
+
+        const error1 = document.getElementById("error1");
+        const error2 = document.getElementById("error2");
+
+        const loginform = document.getElementById("loginform");
+
+        function emailValidateChecking(e) {
+        const emailval = emailid.value.trim();
+        const emailpattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        if (!emailpattern.test(emailval)) {
+            error1.style.display = "block";
+            error1.innerHTML = "Enter a valid email";
+            return false;
+        } else {
+            error1.style.display = "none";
+            error1.innerHTML = "";
+            return true;
+        }
+    }
+
+    function passwordValidateChecking(e) {
+        const passwordval = passwordid.value.trim();
+      
+        const alpha = /[A-Za-z]/;
+        const digit = /\d/;
+
+        if (passwordval.length < 8) {
+            error2.style.display = "block";
+            error2.innerHTML = "Password must be at least 8 characters long";
+            return false;
+        } else if (!alpha.test(passwordval) || !digit.test(passwordval)) {
+            error2.style.display = "block";
+            error2.innerHTML = "Password must contain both alphabets and numbers";
+            return false;
+        } else {
+            error2.style.display = "none";
+            error2.innerHTML = "";
+            return true;
+        }
+
+        
+    }
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+         loginform.addEventListener("submit", async function (e) {
+             // Stop normal form submit
+             e.preventDefault();
+
+        const isEmailValid = emailValidateChecking();
+        const isPasswordValid = passwordValidateChecking();
+
+        // Prevent form submission if any validation fails
+        if (!isEmailValid || !isPasswordValid) {
+            
+            console.log("Form validation failed");
+            
+        }else{
+            loginform.submit();
+        }
+
+        });
+    });
+    
+
+
+  </script>
+</body>
+</html>

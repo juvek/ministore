@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +9,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/userlogin.css">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div class="container">
+            <i class="fas fa-store fa-lg brand-icon"></i>
             <a class="navbar-brand" href="#">MiniStore</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -70,20 +74,28 @@
                 <div class="col-lg-6">
                     <div class="login-form-container">
                         <h3 class="form-title">Log In to Your Account</h3>
-                        <form>
+                        <form id="loginform" method="post" action="/loginuser">
                             <!-- Email Field -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Your email address">
+                                <input type="email" class="form-control" id="emailid" name="email" placeholder="Your email address">
+                                <div id="error1" class="error-message"></div>
                             </div>
+
+                            <% if (locals.message) { %>
+                                 <div class="alert alert-danger">
+                                    <%= message %>
+                                 </div>
+                            <% } %>
                             
                             <!-- Password Field -->
                             <div class="mb-3 password-field">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Your password">
+                                <input type="password" class="form-control" id="passwordid" name="password" placeholder="Your password">
                                 <span class="password-toggle">
                                     <i class="bi bi-eye"></i>
                                 </span>
+                                <div id="error2" class="error-message"></div>
                             </div>
                             
                             <!-- Forgot Password Link -->
@@ -122,7 +134,7 @@
                         
                         <!-- Signup Link -->
                         <p class="text-center mt-4 mb-0">
-                            Don't have an account? <a href="#" class="text-primary">Sign up</a>
+                            Don't have an account? <a href="/signup" class="text-primary">Sign up</a>
                         </p>
                     </div>
                 </div>
@@ -150,6 +162,78 @@
                 }
             });
         });
+
+        
+        const emailid = document.getElementById("emailid");
+        const passwordid = document.getElementById("passwordid");
+
+        const error1 = document.getElementById("error1");
+        const error2 = document.getElementById("error2");
+
+        const loginform = document.getElementById("loginform");
+
+        function emailValidateChecking(e) {
+        const emailval = emailid.value.trim();
+        const emailpattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        if (!emailpattern.test(emailval)) {
+            error1.style.display = "block";
+            error1.innerHTML = "Enter a valid email";
+            return false;
+        } else {
+            error1.style.display = "none";
+            error1.innerHTML = "";
+            return true;
+        }
+    }
+
+    function passwordValidateChecking(e) {
+        const passwordval = passwordid.value.trim();
+      
+        const alpha = /[A-Za-z]/;
+        const digit = /\d/;
+
+        if (passwordval.length < 8) {
+            error2.style.display = "block";
+            error2.innerHTML = "Password must be at least 8 characters long";
+            return false;
+        } else if (!alpha.test(passwordval) || !digit.test(passwordval)) {
+            error2.style.display = "block";
+            error2.innerHTML = "Password must contain both alphabets and numbers";
+            return false;
+        } else {
+            error2.style.display = "none";
+            error2.innerHTML = "";
+            return true;
+        }
+
+        
+    }
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+         loginform.addEventListener("submit", async function (e) {
+             // Stop normal form submit
+             e.preventDefault();
+
+        const isEmailValid = emailValidateChecking();
+        const isPasswordValid = passwordValidateChecking();
+
+        // Prevent form submission if any validation fails
+        if (!isEmailValid || !isPasswordValid) {
+            
+            console.log("Form validation failed");
+            
+        }else{
+            loginform.submit();
+        }
+
+        });
+    });
+    
+
+
+
     </script>
 </body>
 </html>    

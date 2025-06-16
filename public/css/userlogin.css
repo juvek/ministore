@@ -23,6 +23,10 @@ body {
     color: var(--primary-color);
     font-size: 1.5rem;
 }
+.brand-icon {
+    color: var(--primary-color);
+    margin-right: 8px; 
+}
 
 .nav-link {
     font-weight: 500;
@@ -47,7 +51,7 @@ body {
 /* Hero section */
 .hero {
     min-height: calc(100vh - 76px);
-    background: url('/public/images/background.jpg') center/cover no-repeat;
+    background: url('/images/background.jpg') center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
@@ -205,6 +209,12 @@ body {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75rem;
+    display: none;
 }
 
 @media (max-width: 991.98px) {

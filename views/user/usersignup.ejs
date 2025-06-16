@@ -8,11 +8,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/usersignup.css">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div class="container">
+            <i class="fas fa-store fa-lg brand-icon"></i>
             <a class="navbar-brand" href="#">MiniStore</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -54,129 +57,109 @@
     <section class="hero">
         <div class="container hero-content">
             <div class="row align-items-center">
+                
                 <!-- Left Side - Store Description -->
                 <div class="col-lg-6">
-                    <div class="mb-5">
+                    <div class="mb-5 text-white">
                         <h1 class="logo-text">MiniStore</h1>
-                        <h2 class="mb-4">Join Our Community of Fashion Enthusiasts</h2>
-                        <p class="store-description">
-                            MiniStore is your premier destination for curated fashion that combines style, quality, and affordability. We offer a carefully selected collection of clothing and accessories for men, women, and children that help you express your unique personality.
+                        <h2 class="mb-4">Join Our Community of Food Lovers</h2>
+                        <p class="store-description text-white">
+                            MiniStore is your go-to destination for premium food products that blend taste, nutrition, and quality. We offer a thoughtfully curated selection of gourmet items, organic groceries, snacks, and beverages that cater to every palate and lifestyle.
                         </p>
-                        <p class="store-description">
-                            By creating an account, you'll get access to exclusive deals, early access to new collections, personalized recommendations, and a seamless shopping experience across all devices.
+                        <p class="store-description text-white">
+                            By creating an account, you'll get access to exclusive deals, early access to new products, personalized recommendations, and a seamless shopping experience across all devices.
                         </p>
-                        
+    
                         <!-- Store Features -->
                         <div class="store-features">
                             <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="bi bi-truck"></i>
-                                </div>
+                                <div class="feature-icon"><i class="bi bi-truck"></i></div>
                                 <div>
-                                    <h5 class="mb-0">Free Shipping</h5>
-                                    <p class="mb-0 text-muted">On all orders over $50</p>
+                                    <h5 class="mb-0">Free Delivery</h5>
+                                    <p class="mb-0 text-white-50">On all orders over ₹1000</p>
                                 </div>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="bi bi-arrow-counterclockwise"></i>
-                                </div>
+                                <div class="feature-icon"><i class="bi bi-arrow-counterclockwise"></i></div>
                                 <div>
                                     <h5 class="mb-0">Easy Returns</h5>
-                                    <p class="mb-0 text-muted">30-day return policy</p>
+                                    <p class="mb-0 text-white-50">1 day return policy</p>
                                 </div>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="bi bi-shield-check"></i>
-                                </div>
+                                <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
                                 <div>
                                     <h5 class="mb-0">Secure Payments</h5>
-                                    <p class="mb-0 text-muted">Protected by encryption</p>
+                                    <p class="mb-0 text-white-50">Protected by encryption</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+    
                 <!-- Right Side - Signup Form -->
-                <div class="col-lg-6">
-                    <div class="signup-form">
-                        <h3 class="form-title">Create Your Account</h3>
-                        <form>
-                            <!-- Username Field -->
+                <div class="col-lg-4 offset-lg-2">
+                    <div class="signup-form bg-white p-4 rounded shadow">
+                        <h3 class="form-title mb-3">Create Your Account</h3>
+                        <form id="signform" method="post" action="/usersignup">
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Choose a username">
+                                <label for="fullname" class="form-label">Full name</label>
+                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Your full name">
+                                <div id="error1" class="error-message"></div>
                             </div>
-                            
-                            <!-- Email Field -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Your email address">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Your email address">
+                                <div id="error2" class="error-message"></div>
                             </div>
-                            
-                            <!-- Password Field -->
+                             <% if (locals.message) { %>
+                                 <div class="alert alert-danger">
+                                    <%= message %>
+                                 </div>
+                            <% } %>
+                            <div class="mb-3">
+                                <label for="mobile" class="form-label">Mobile Number</label>
+                                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}">
+                                <div id="error3" class="error-message"></div>
+                            </div>
                             <div class="mb-3 password-field">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Create a password">
-                                <span class="password-toggle">
-                                    <i class="bi bi-eye"></i>
-                                </span>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Create a password">
+                                <span class="password-toggle"><i class="bi bi-eye"></i></span>
+                                <div id="error4" class="error-message"></div>
                             </div>
-                            
-                            <!-- Confirm Password Field -->
                             <div class="mb-3 password-field">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password">
-                                <span class="password-toggle">
-                                    <i class="bi bi-eye"></i>
-                                </span>
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+                                <span class="password-toggle"><i class="bi bi-eye"></i></span>
+                                <div id="error5" class="error-message"></div>
                             </div>
-                            
-                            <!-- Terms Agreement -->
-                            <div class="mb-4 form-check">
-                                <input type="checkbox" class="form-check-input" id="termsCheck">
-                                <label class="form-check-label" for="termsCheck">
-                                    I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
-                                </label>
-                            </div>
-                            
-                            <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary w-100">Create Account</button>
                         </form>
-                        
-                        <!-- Divider -->
-                        <div class="divider">
-                            <span>or sign up with</span>
-                        </div>
-                        
-                        <!-- Social Login Buttons -->
+    
+                        <div class="divider mt-4 mb-3 text-center"><span>or sign up with</span></div>
+    
                         <div class="row">
                             <div class="col-6">
-                                <button class="social-btn w-100">
-                                    <i class="bi bi-google social-icon"></i> Google
-                                </button>
+                                <a href="/auth/google" class="social-btn w-100"><i class="bi bi-google social-icon"></i> Google</a>
                             </div>
-                            <div class="col-6">
-                                <button class="social-btn w-100">
-                                    <i class="bi bi-facebook social-icon"></i> Facebook
-                                </button>
-                            </div>
+                            
                         </div>
-                        
-                        <!-- Login Link -->
+    
                         <p class="text-center mt-4 mb-0">
                             Already have an account? <a href="#" class="text-primary">Log in</a>
                         </p>
                     </div>
                 </div>
+    
             </div>
         </div>
     </section>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Password visibility toggle
         document.querySelectorAll('.password-toggle').forEach(toggle => {
@@ -195,6 +178,124 @@
                 }
             });
         });
+
+        
+    const fullnameid = document.getElementById("fullname");
+    const emailid = document.getElementById("email");
+    const mobileid = document.getElementById("mobile");
+    const passwordid = document.getElementById("password");
+    const confirmPasswordid = document.getElementById("confirmPassword");
+
+    const error1 = document.getElementById("error1");
+    const error2 = document.getElementById("error2");
+    const error3 = document.getElementById("error3");
+    const error4 = document.getElementById("error4");
+    const error5 = document.getElementById("error5");
+
+    const signform = document.getElementById("signform");
+
+     function nameValidateChecking(e) {
+        const nameval = fullnameid.value.trim();
+        const namepattern = /^[A-Za-z\s]+$/;
+
+        if (nameval === "") {
+            error1.style.display = "block";
+            error1.innerHTML = "Enter a valid name";
+            return false;
+        } else if (!namepattern.test(nameval)) {
+            error1.style.display = "block";
+            error1.innerHTML = "Name can only contain alphabets and spaces";
+            return false;
+        } else {
+            error1.style.display = "none";
+            error1.innerHTML = "";
+            return true;
+        }
+    }
+
+    function emailValidateChecking(e) {
+        const emailval = emailid.value.trim();
+        const emailpattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        if (!emailpattern.test(emailval)) {
+            error2.style.display = "block";
+            error2.innerHTML = "Enter a valid email";
+            return false;
+        } else {
+            error2.style.display = "none";
+            error2.innerHTML = "";
+            return true;
+        }
+    }
+
+    function mobileValidateChecking(e) {
+        const mobileval = mobileid.value.trim();
+
+        if (mobileval === "") {
+            error3.style.display = "block";
+            error3.innerHTML = "Enter a valid mobile number";
+            return false;
+        } else if (mobileval.length !== 10 || isNaN(mobileval)) {
+            error3.style.display = "block";
+            error3.innerHTML = "Enter a valid 10-digit number";
+            return false;
+        } else {
+            error3.style.display = "none";
+            error3.innerHTML = "";
+            return true;
+        }
+    }
+
+    function passwordValidateChecking(e) {
+        const passwordval = passwordid.value.trim();
+        const confirmPasswordval = confirmPasswordid.value.trim();
+        const alpha = /[A-Za-z]/;
+        const digit = /\d/;
+
+        if (passwordval.length < 8) {
+            error4.style.display = "block";
+            error4.innerHTML = "Password must be at least 8 characters long";
+            return false;
+        } else if (!alpha.test(passwordval) || !digit.test(passwordval)) {
+            error4.style.display = "block";
+            error4.innerHTML = "Password must contain both alphabets and numbers";
+            return false;
+        } else {
+            error4.style.display = "none";
+            error4.innerHTML = "";
+        }
+
+        if (passwordval !== confirmPasswordval) {
+            error5.style.display = "block";
+            error5.innerHTML = "Passwords do not match";
+            return false;
+        } else {
+            error5.style.display = "none";
+            error5.innerHTML = "";
+            return true;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+         signform.addEventListener("submit", async function (e) {
+             // Stop normal form submit
+
+        const isNameValid = nameValidateChecking();
+        const isEmailValid = emailValidateChecking();
+        const isMobileValid = mobileValidateChecking();
+        const isPasswordValid = passwordValidateChecking();
+
+        // Prevent form submission if any validation fails
+        if (!isNameValid || !isEmailValid || !isMobileValid || !isPasswordValid) {
+            e.preventDefault();
+            console.log("Form validation failed");
+    
+        }
+
+        });
+    });
+
     </script>
 </body>
 </html>

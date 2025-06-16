@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniStore - Sign Up</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<style>
+    :root {
+  --primary-color: #6366f1;
+  --dark-color: #1e293b;
+  --gray-color: #64748b;
+}
+
+header {
+  z-index: 1030;
+}
+
+/* Navbar container */
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand title */
+.navbar-brand {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+/* Brand icon (store icon) */
+.brand-icon {
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+
+/* Nav links */
+.nav-link {
+  font-weight: 500;
+  color: var(--dark-color) !important;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color) !important;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+/* Icons in navbar (heart, cart, person) */
+.nav-icon {
+  color: var(--gray-color);
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  position: relative;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.nav-icon:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* Special hover for bi-person */
+.nav-icon .bi-person:hover {
+  color: var(--primary-color);
+  transform: scale(1.2);
+}
+
+/* Badge styles (cart count, etc.) */
+.badge-container {
+  position: relative;
+}
+
+.badge-notify {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.6rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dropdown */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown-content .user-info {
+  padding: 12px 16px;
+  font-weight: 500;
+  color: var(--dark-color);
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-content a {
+  color: var(--dark-color);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer-title {
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.footer-links a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #cbd5e1;
+    transition: all 0.2s;
+}
+
+.social-icon:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Mobile icon spacing */
+@media (max-width: 991px) {
+  .d-flex.align-items-center.gap-3 {
+    margin-top: 15px;
+  }
+}
+</style>
+<body>
+    <!-- Navigation Bar -->
+     <header>
+     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container">
+            <i class="fas fa-store fa-lg brand-icon"></i>
+            <a class="navbar-brand" href="#">MiniStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active mx-2" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Inline Search Bar -->
+                    <form class="d-flex align-items-center" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    
+                    <a href="#" class="nav-icon badge-container">
+                        <i class="bi bi-heart"></i>
+                        <span class="badge-notify">2</span>
+                    </a>
+                    <a href="#" class="nav-icon badge-container">
+                        <i class="bi bi-cart"></i>
+                        <span class="badge-notify">3</span>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="#" class="nav-icon" id="userIcon">
+                            <i class="bi bi-person"></i>
+                        </a>
+                        <div class="dropdown-content" id="userDropdown">
+                            <a href="/profile" class="user-info">
+
+                               <%=fullname%>
+                            </a>
+                            <a href="/signout" class="signout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sign Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </header>

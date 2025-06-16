@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniStore - Shop</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <style>
+        /* Custom CSS matching home page styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 8px 16px;
+        }
+        
+        .navbar-nav .nav-link.active {
+            color: #0d6efd;
+        }
+        
+        .badge-container {
+            position: relative;
+        }
+        
+        .badge-notify {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+        }
+        
+        .user-info {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+        
+        .signout {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #dc3545;
+            font-weight: 500;
+        }
+        
+        .signout i {
+            margin-right: 8px;
+        }
+        
+        .shop-banner {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+        }
+        
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .product-price {
+            font-weight: 600;
+            color: #0d6efd;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #198754;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+        
+        .filter-sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .form-check-label {
+            cursor: pointer;
+        }
+        
+        .newsletter {
+            background-color: #f1f5f9;
+            padding: 80px 0;
+            }
+
+/* Footer */
+            footer {
+                background-color: var(--dark-color);
+                color: white;
+                padding: 60px 0 30px;
+            }
+
+            .footer-title {
+                font-weight: 600;
+                margin-bottom: 20px;
+                font-size: 1.2rem;
+            }
+
+            .footer-links {
+                list-style: none;
+                padding: 0;
+            }
+
+            .footer-links li {
+                margin-bottom: 10px;
+            }
+
+            .footer-links a {
+                color: #cbd5e1;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+
+            .footer-links a:hover {
+                color: white;
+                padding-left: 5px;
+            }
+
+            .social-icon {
+                font-size: 1.5rem;
+                margin-right: 15px;
+                color: #cbd5e1;
+                transition: all 0.2s;
+            }
+
+            .social-icon:hover {
+                color: white;
+                transform: scale(1.1);
+            }
+
+        
+        .product-category {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container">
+            <i class="fas fa-store fa-lg brand-icon"></i>
+            <a class="navbar-brand" href="#">MiniStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active mx-2" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Inline Search Bar -->
+                    <form class="d-flex align-items-center" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    
+                    <a href="#" class="nav-icon badge-container">
+                        <i class="bi bi-heart"></i>
+                        <span class="badge-notify">2</span>
+                    </a>
+                    <a href="#" class="nav-icon badge-container">
+                        <i class="bi bi-cart"></i>
+                        <span class="badge-notify">3</span>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="#" class="nav-icon" id="userIcon">
+                            <i class="bi bi-person"></i>
+                        </a>
+                        <div class="dropdown-content" id="userDropdown">
+                            <div class="user-info">
+                                User Name
+                            </div>
+                            <a href="#" class="signout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sign Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Banner -->
+    <section class="shop-banner">
+        <div class="container text-center">
+            <h1 class="fw-bold mb-3">Shop All Products</h1>
+            <p class="lead text-muted">Browse our collection of high-quality products at affordable prices</p>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Filters -->
+                <div class="col-lg-3 mb-4 mb-lg-0">
+                    <div class="filter-sidebar">
+                        <h4 class="filter-title">Categories</h4>
+                        <div class="mb-4">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="category1">
+                                <label class="form-check-label" for="category1">Fruits</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="category2">
+                                <label class="form-check-label" for="category2">Vegetables</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="category3">
+                                <label class="form-check-label" for="category3">Drinks</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="category4">
+                                <label class="form-check-label" for="category4">Snacks</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="category5">
+                                <label class="form-check-label" for="category5">Personal Care</label>
+                            </div>
+                        </div>
+
+                        <h4 class="filter-title">Price Range</h4>
+                        <div class="mb-4">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price1">
+                                <label class="form-check-label" for="price1">Under ₹100</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price2">
+                                <label class="form-check-label" for="price2">₹100 - ₹500</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price3">
+                                <label class="form-check-label" for="price3">₹500 - ₹1,000</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price4">
+                                <label class="form-check-label" for="price4">₹1,000 - ₹3,000</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price5">
+                                <label class="form-check-label" for="price5">Over ₹3,000</label>
+                            </div>
+                        </div>
+
+                        <h4 class="filter-title">Special Offers</h4>
+                        <div class="mb-4">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="offer1">
+                                <label class="form-check-label" for="offer1">On Sale</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="offer2">
+                                <label class="form-check-label" for="offer2">New Arrivals</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="offer3">
+                                <label class="form-check-label" for="offer3">Best Sellers</label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary w-100">Apply Filters</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="col-lg-9">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="mb-0">Showing 1-8 of 32 results</p>
+                        <div class="d-flex align-items-center">
+                            <label class="me-2">Sort by:</label>
+                            <select class="form-select" style="width: auto;">
+                                <option selected>Default</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Newest First</option>
+                                <option>Popularity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 1 -->
+                    <div class="row g-4 mb-4">
+                        <!-- Product 1 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Grapes">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">fruits</div>
+                                    <h5 class="product-title">Grapes</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹2,500.00 <small class="text-decoration-line-through text-muted">₹3,500.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Tomatoes">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">vegetables</div>
+                                    <h5 class="product-title">Tomatoes</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹2,500.00 <small class="text-decoration-line-through text-muted">₹3,500.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Cucumber">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">vegetables</div>
+                                    <h5 class="product-title">Cucumber</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹1,500.00 <small class="text-decoration-line-through text-muted">₹3,500.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Ginger">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">vegetables</div>
+                                    <h5 class="product-title">Ginger</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹2,500.00 <small class="text-decoration-line-through text-muted">₹3,500.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="row g-4">
+                        <!-- Product 5 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Cocacola">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">drinks</div>
+                                    <h5 class="product-title">Cocacola</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹60.00 <small class="text-decoration-line-through text-muted">₹90.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Lassi">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">drinks</div>
+                                    <h5 class="product-title">Lassi</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹20.00 <small class="text-decoration-line-through text-muted">₹30.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 7 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Frooti">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">drinks</div>
+                                    <h5 class="product-title">Frooti</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹50.00 <small class="text-decoration-line-through text-muted">₹70.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 8 -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <span class="new-badge" style="left: 70px;">New</span>
+                                    <img src="/api/placeholder/280/280" class="card-img-top" alt="Rasna">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <button class="btn btn-light rounded-circle p-2"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-category">drinks</div>
+                                    <h5 class="product-title">Rasna</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">₹250.00 <small class="text-decoration-line-through text-muted">₹350.00</small></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <button class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="feature-box bg-white p-4 text-center rounded shadow-sm">
+                        <i class="bi bi-truck display-6 text-primary mb-3"></i>
+                        <h4 class="fw-bold mb-2">Free Shipping</h4>
+                        <p class="text-muted mb-0">On all orders over ₹1000</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-box bg-white p-4 text-center rounded shadow-sm">
+                        <i class="bi bi-shield-check display-6 text-primary mb-3"></i>
+                        <h4 class="fw-bold mb-2">Secure Payment</h4>
+                        <p class="text-muted mb-0">100% secure payment</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-box bg-white p-4 text-center rounded shadow-sm">
+                        <i class="bi bi-arrow-counterclockwise display-6 text-primary mb-3"></i>
+                        <h4 class="fw-bold mb-2">Easy Returns</h4>
+                        <p class="text-muted mb-0">30 days return policy</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-box bg-white p-4 text-center rounded shadow-sm">
+                        <i class="bi bi-headset display-6 text-primary mb-3"></i>
+                        <h4 class="fw-bold mb-2">24/7 Support</h4>
+                        <p class="text-muted mb-0">Dedicated support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+   <!-- Newsletter Section -->
+   <section class="newsletter">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Subscribe to Our Newsletter</h2>
+        <p class="text-muted mb-4">Get updates about new products and special offers</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control form-control-lg" placeholder="Your email address">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <h1 class="navbar-brand text-white mb-4">MiniStore</h1>
+                <p class="text-muted mb-4">Your one-stop shop for household needs at affordable prices.</p>
+                <div class="mb-4">
+                    <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-pinterest"></i></a>
+                </div>
+                <div class="payment-icons mt-3">
+                    <img src="/images/payments/1.png" alt="Visa" width="40" class="me-2">
+                    <img src="/images/payments/2.png" alt="MasterCard" width="40" class="me-2">
+                    <img src="/images/payments/5.png" alt="PayPal" width="40" class="me-2">
+                </div>
+                
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">Shop</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Women's Clothing</a></li>
+                    <li><a href="#">Men's Clothing</a></li>
+                    <li><a href="#">Kids Collection</a></li>
+                    <li><a href="#">Acce</a></li>
+                    <li><a href="#">New products</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">Help</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Find a Store</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">Contact</h5>
+                <ul class="footer-links">
+                    <li><i class="bi bi-geo-alt me-2"></i> 123 Fashion Street, NY 10001</li>
+                    <li><i class="bi bi-telephone me-2"></i> (123) 456-7890</li>
+                    <li><i class="bi bi-envelope me-2"></i> contact@ministore.com</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="mt-5 mb-4" style="border-color: #475569;">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2025 MiniStore. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-muted me-3">Privacy Policy</a>
+                <a href="#" class="text-muted me-3">Terms of Service</a>
+                <a href="#" class="text-muted">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
